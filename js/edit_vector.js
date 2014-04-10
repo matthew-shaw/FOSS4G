@@ -226,8 +226,6 @@ var modify = new ol.interaction.Modify({
   features: select.getFeatures()
 });
 
-var typeSelect = document.getElementById('type');
-
 var map = new ol.Map({
   interactions: ol.interaction.defaults().extend([select, modify]),
   layers: [
@@ -240,19 +238,9 @@ var map = new ol.Map({
   target: 'map',
   view: new ol.View2D({
     center: [
-                            14708.755563011973,
-                            6761018.225448865
-                        ],
+              14708.755563011973,
+              6761018.225448865
+            ],
     zoom: 18
   })
 });
-
-function addInteraction() {
-  draw = new ol.interaction.Draw({
-    source: new ol.source.Vector(),
-    type: ol.geom.Polygon
-  });
-  map.addInteraction(draw);
-}
-
-addInteraction();
