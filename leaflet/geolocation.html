@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Leaflet Evaluation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Leaflet Geolocation</title>
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -14,12 +14,13 @@
   <body role="document">
     <div class="container-fluid" role="main">
       <div class="page-header">
-        <h1>Leaflet Evaluation</h1>
+        <h1>Leaflet Geolocation</h1>
       </div>
       <div id="map" style="width: 100%; height: 600px">
         <script>
-          var map = L.map('map').setView([51.505, -0.09], 13);
-          L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+          var map = L.map('map');
+
+      		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
       			maxZoom: 18,
       			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
       				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -27,32 +28,23 @@
       			id: 'examples.map-i86knfo3'
       		}).addTo(map);
 
-          L.marker([51.5, -0.09]).addTo(map)
-      			.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
+      		function onLocationFound(e) {
+      			var radius = e.accuracy / 2;
 
-      		L.circle([51.508, -0.11], 500, {
-      			color: 'red',
-      			fillColor: '#f03',
-      			fillOpacity: 0.5
-      		}).addTo(map).bindPopup("I am a circle.");
+      			L.marker(e.latlng).addTo(map)
+      				.bindPopup("You are within " + radius + " meters from this point").openPopup();
 
-      		L.polygon([
-      			[51.509, -0.08],
-      			[51.503, -0.06],
-      			[51.51, -0.047]
-      		]).addTo(map).bindPopup("I am a polygon.");
-
-
-      		var popup = L.popup();
-
-      		function onMapClick(e) {
-      			popup
-      				.setLatLng(e.latlng)
-      				.setContent("You clicked the map at " + e.latlng.toString())
-      				.openOn(map);
+      			L.circle(e.latlng, radius).addTo(map);
       		}
 
-      		map.on('click', onMapClick);
+      		function onLocationError(e) {
+      			alert(e.message);
+      		}
+
+      		map.on('locationfound', onLocationFound);
+      		map.on('locationerror', onLocationError);
+
+      		map.locate({setView: true, maxZoom: 16});
         </script>
       </div>
     </div> <!-- /container -->
