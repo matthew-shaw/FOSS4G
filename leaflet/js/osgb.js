@@ -1,54 +1,32 @@
-(function() {
+/* L.Map with OS options */
+var map = new L.Map('map', {
+  crs: L.OSOpenSpace.getCRS(),
+  continuousWorld: true,
+  worldCopyJump: false,
+  minZoom: 2,
+  maxZoom: L.OSOpenSpace.RESOLUTIONS.length - 1,
+});
 
-    "use strict"; //enable strict mode for whole block
+/* New L.TileLayer.OSOpenSpace with API Key */
+openspaceLayer = L.tileLayer.osopenspace("FFB702322FE0714DE0430B6CA40A06C6", {debug: true});
 
-    var map,
-      OSHQ = {
-        WGS84: [50.936715, -1.4701989],
-        OSGB: [437324, 115386]
-      };
+map.addLayer(openspaceLayer);
+map.setView([51.504, -0.159], 9);
 
+/* add some ui elems to the map */
 
-    function init() {
+L.control.scale().addTo(map);
 
-      var popup = L.popup(),
-        openspaceLayer;
+L.marker([51.504, -0.159])
+  .addTo(map)
+  .bindPopup('A pretty CSS3 popup.<br />Easily customizable.')
+  .openPopup();
 
-      /* L.Map with OS options */
-      map = new L.Map('map', {
-        crs: L.OSOpenSpace.getCRS(),
-        continuousWorld: true,
-        worldCopyJump: false,
-        minZoom: 2,
-        maxZoom: L.OSOpenSpace.RESOLUTIONS.length - 1,
-      });
+function onMapClick(e) {
+  popup
+    .setLatLng(e.latlng)
+    .setContent("You clicked the map at " + e.latlng.toString())
+    .openOn(map);
+}
 
-      /* New L.TileLayer.OSOpenSpace with API Key */
-      openspaceLayer = L.tileLayer.osopenspace("FFB702322FE0714DE0430B6CA40A06C6", {debug: true});
-
-      map.addLayer(openspaceLayer);
-      map.setView(OSHQ.WGS84, 1);
-
-      /* add some ui elems to the map */
-
-      L.control.scale().addTo(map);
-
-      L.marker(OSHQ.WGS84).addTo(map)
-        .bindPopup("<b>Hello world!</b><br />I am at OSHQ.").openPopup();
-
-      /* add some event callbacks */
-
-      function onMapClick(e) {
-        popup
-          .setLatLng(e.latlng)
-          .setContent("You clicked the map at " + e.latlng.toString())
-          .openOn(map);
-      }
-
-      map.on('click', onMapClick);
-
-  }
-
-  window.onload = init;
-
-} ());
+map.on('click', onMapClick);
