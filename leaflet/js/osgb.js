@@ -30,12 +30,3 @@ L.marker([51.504, -0.159])
   .addTo(map)
   .bindPopup('This is some OS OpenSpace Data in OSGB36')
   .openPopup();
-
-function onMapClick(e) {
-  popup
-    .setLatLng(e.latlng)
-    .setContent("You clicked the map at " + e.latlng.toString())
-    .openOn(map);
-}
-
-map.on('click', onMapClick);
