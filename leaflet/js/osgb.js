@@ -28,7 +28,7 @@ L.control.scale().addTo(map);
 
 L.marker([51.504, -0.159])
   .addTo(map)
-  .bindPopup('A pretty CSS3 popup.<br />Easily customizable.')
+  .bindPopup('This is some OS OpenSpace Data in OSGB36')
   .openPopup();
 
 function onMapClick(e) {
