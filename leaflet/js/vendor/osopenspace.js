@@ -18,7 +18,7 @@ L.OSOpenSpace = L.Class.extend({
          *  In metres per pixel.
          * {Array}
          */
-        RESOLUTIONS: [2500, 1000, 500, 200, 100, 50, 25, 10, 5, 2.5],
+        RESOLUTIONS: [2500, 1000, 500, 200, 100, 50, 25, 10, 5, 2.5, 1],
 
         /**
          * The OSGB36 datum Proj4 def & auxiliary data.
@@ -100,8 +100,8 @@ L.TileLayer.OSOpenSpace = L.TileLayer.WMS.extend({
     resolutions: [],
 
     /**
-     * The URL of the OS OpenSpace (Free) tile server
-     */
+     * The URL of the OS OpenSpace (Free) tile serve
+r     */
     _url: "http://openspace.ordnancesurvey.co.uk/osmapapi/ts",
 
     /**
@@ -110,9 +110,11 @@ L.TileLayer.OSOpenSpace = L.TileLayer.WMS.extend({
      * Not used at present, for info.
      *
      * For more details see http://www.ordnancesurvey.co.uk/business-and-government/help-and-support/web-services/os-ondemand/configuring-wmts.html
-     *
+     */
 
     tileResolutions: {
+
+        "VML": [1.0, 250],
         "VMD": [2.5, 200],
         "50K": [5.0, 200],
         "50KR": [10.0, 200],
@@ -123,7 +125,7 @@ L.TileLayer.OSOpenSpace = L.TileLayer.WMS.extend({
         "OV2": [500.0, 200],
         "OV1": [1000.0, 200],
         "OV0": [2500.0, 200]
-    },*/
+    },
 
     /**
      * Set whether to output some logging.
