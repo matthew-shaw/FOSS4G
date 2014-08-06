@@ -1,3 +1,4 @@
+//Define coordinate system using PROJ4 standards
 var osgb = new L.Proj.CRS('EPSG:27700',
   '+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000' +
   '+ellps=airy +datum=OSGB36 +units=m +no_defs',
@@ -7,7 +8,7 @@ var osgb = new L.Proj.CRS('EPSG:27700',
   }
 );
 
-/* L.Map with OS options */
+//Leaflet map with OS options
 var map = new L.Map('map', {
   crs: osgb,
   continuousWorld: true,
@@ -16,14 +17,17 @@ var map = new L.Map('map', {
   maxZoom: 10,
 });
 
-/* New L.TileLayer.OSOpenSpace with API Key */
+//New OSOpenSpace layer with API Key
 openspaceLayer = L.tileLayer.osopenspace("FFB702322FE0714DE0430B6CA40A06C6", {debug: true});
-
 map.addLayer(openspaceLayer);
-map.setView([51.504, -0.159], 9);
 
+map.setView([51.516251, -0.11660500], 9);
+
+//Define name of CRS in GeoJSON using PROJ4
 proj4.defs("urn:ogc:def:crs:EPSG:27700","+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs");
 
+//The GeoJSON object, hard coded now but would be parameterised or Jinja-fied
+//A polygon around Lincolns Inn Fields, London.
 var geojson = {
     "type": "Feature",
     "crs": {
@@ -37,24 +41,24 @@ var geojson = {
         "coordinates": [
             [
                 [
-                    404439.5558898761,
-                    369899.8484076261
+                    530647,
+                    181419
                 ],
                 [
-                    404440.0558898761,
-                    369899.8484076261
+                    530855,
+                    181500
                 ],
                 [
-                    404440.0558898761,
-                    369900.3484076261
+                    530917,
+                    181351
                 ],
                 [
-                    404439.5558898761,
-                    369900.3484076261
+                    530713,
+                    181266
                 ],
                 [
-                    404439.5558898761,
-                    369899.8484076261
+                    530647,
+                    181419
                 ]
             ]
         ]
@@ -64,8 +68,8 @@ var geojson = {
     }
 };
 
+//Add the GeoJSON to the map
 L.Proj.geoJson(geojson).addTo(map);
 
-/* add some ui elems to the map */
-
+//Add a scale control to the map
 L.control.scale().addTo(map);
