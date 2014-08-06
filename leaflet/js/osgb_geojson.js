@@ -64,12 +64,21 @@ var geojson = {
         ]
     },
     "properties": {
-        "Description": "Polygon"
+        "name": "Lincolns Inn Fields"
     }
 };
 
 //Add the GeoJSON to the map
-L.Proj.geoJson(geojson).addTo(map);
+L.Proj.geoJson(geojson).addTo(map).bindPopup("I am a " + geojson.geometry.type + " called " + geojson.properties.name);
 
 //Add a scale control to the map
 L.control.scale().addTo(map);
+
+var popup = L.popup();
+
+function onMapClick(e) {
+  popup
+    .openOn(map);
+}
+
+map.on('click', onMapClick);
