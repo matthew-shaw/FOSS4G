@@ -64,7 +64,7 @@ var geojson = {
         ]
     },
     "properties": {
-        "name": "Lincolns Inn Fields"
+        "name": "Lincoln's Inn Fields"
     }
 };
 
@@ -74,6 +74,7 @@ L.Proj.geoJson(geojson).addTo(map).bindPopup("I am a " + geojson.geometry.type +
 //Add a scale control to the map
 L.control.scale().addTo(map);
 
+//Add a popup on the geojson feature
 var popup = L.popup();
 
 function onMapClick(e) {
