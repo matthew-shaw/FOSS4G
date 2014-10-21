@@ -71,7 +71,10 @@ L.Proj.geoJson(geojson, {
   color: 'red',
   fillColor: '#f03',
   fillOpacity: 0.5
-}).addTo(map).bindPopup("I am a " + geojson.geometry.type + " called " + geojson.properties.name);
+}).addTo(map).bindPopup("<b>Type:</b> " + geojson.geometry.type +
+  "<br/><b>Name:</b> " + geojson.properties.name +
+  "<br/><b>CRS:</b> " + geojson.crs.properties.name +
+  "<br/><b>Coordinates:</b> " + geojson.geometry.coordinates);
 
 //Add a scale control to the map
 L.control.scale().addTo(map);
