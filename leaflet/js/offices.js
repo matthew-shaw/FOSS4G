@@ -23,7 +23,7 @@ var lrIcon = L.icon({
 });
 
 function onEachFeature(feature, layer) {
-  layer.bindPopup("<h5><b>" + feature.properties.name + "</b></h5>" + feature.properties.address);
+  layer.bindPopup("<h5><b><a href='" + feature.properties.url + "'>" + feature.properties.name + "</a></b></h5>");
 }
 
 var lrOffices = L.geoJson(lrOffices, {
