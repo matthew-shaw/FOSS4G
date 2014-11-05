@@ -53,6 +53,26 @@ var bicycleRental = L.geoJson(bicycleRental, {
   }
 }).addTo(map);
 
+var lightRailStop = L.geoJson(lightRailStop, {
+
+  style: function (feature) {
+    return feature.properties && feature.properties.style;
+  },
+
+  onEachFeature: onEachFeature,
+
+  pointToLayer: function (feature, latlng) {
+    return L.circleMarker(latlng, {
+      radius: 8,
+      fillColor: "#0000ff",
+      color: "#000",
+      weight: 1,
+      opacity: 1,
+      fillOpacity: 0.8
+    });
+  }
+}).addTo(map);
+
 var campus = L.geoJson(campus, {
 
   style: function (feature) {
@@ -93,7 +113,8 @@ var overlays = {
   "Campus": campus,
   "Bicycle Rental": bicycleRental,
   "Free Bus": freeBus,
-  "Coors Field": coorsLayer
+  "Coors Field": coorsLayer,
+  "Light Rail Stop": lightRailStop
 };
 
 L.control.layers(baseLayers, overlays).addTo(map);
