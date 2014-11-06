@@ -73,7 +73,7 @@ document.getElementById('find').onclick = function() {
               .openOn(map);
         }
     });
-    
+
     map.on('locationfound', onLocationFound);
     map.on('locationerror', onLocationError);
 };
