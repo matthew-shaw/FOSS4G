@@ -53,10 +53,10 @@ document.getElementById('find').onclick = function() {
         var res = leafletKnn(lrOffices).nearest(
             [pos.coords.longitude, pos.coords.latitude], 1);
         if (res.length) {
-            document.getElementById('find').innerHTML = 'Closest office to you is ' + res[0].layer.feature.properties.name;
+            document.getElementById('find').innerHTML = 'Found you!';
             var popup = L.popup()
               .setLatLng([res[0].layer.feature.geometry.coordinates[1],res[0].layer.feature.geometry.coordinates[0]])
-              .setContent("<h5><b><a href='" + res[0].layer.feature.properties.url + "'>" + res[0].layer.feature.properties.name + "</a></b></h5>")
+              .setContent("Your nearest office is <h5><b><a href='" + res[0].layer.feature.properties.url + "'>" + res[0].layer.feature.properties.name + "</a></b></h5>")
               .openOn(map);
         }
     });
