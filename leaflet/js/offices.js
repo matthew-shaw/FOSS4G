@@ -56,7 +56,7 @@ document.getElementById('find').onclick = function() {
             document.getElementById('find').innerHTML = 'Found you!';
             var popup = L.popup()
               .setLatLng([res[0].layer.feature.geometry.coordinates[1],res[0].layer.feature.geometry.coordinates[0]])
-              .setContent("<p>Your nearest office is</p> <h5><b><a href='" + res[0].layer.feature.properties.url + "'>" + res[0].layer.feature.properties.name + "</a></b></h5>")
+              .setContent("<h5>Your nearest office is <b><a href='" + res[0].layer.feature.properties.url + "'>" + res[0].layer.feature.properties.name + "</a></b></h5>")
               .openOn(map);
         }
     });
