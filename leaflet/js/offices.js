@@ -70,7 +70,7 @@ document.getElementById('find').onclick = function() {
               .openOn(map);
             map.on('locationfound', onLocationFound);
 
-            map.locate({setView: false, maxZoom: 16});
+            map.locate({setView: true, maxZoom: 16});
         } else {
           map.on('locationerror', onLocationError);
         }
