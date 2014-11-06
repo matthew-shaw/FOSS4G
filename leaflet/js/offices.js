@@ -53,9 +53,7 @@ document.getElementById('find').onclick = function() {
         var res = leafletKnn(lrOffices).nearest(
             [pos.coords.longitude, pos.coords.latitude], 1);
         if (res.length) {
-            document.getElementById('find').innerHTML = 'Closest City to You is ' + res[0].layer.feature.properties.name;
-        } else {
-            document.getElementById('find').innerHTML = 'You aren\'t in America';
+            document.getElementById('find').innerHTML = 'Closest office to you is ' + res[0].layer.feature.properties.name;
         }
     });
 };
