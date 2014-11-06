@@ -72,10 +72,10 @@ document.getElementById('find').onclick = function() {
               .setContent("<h5>Your nearest office is <b><a href='" + res[0].layer.feature.properties.url + "'>" + res[0].layer.feature.properties.name + "</a></b></h5>")
               .openOn(map);
         }
-
-        map.on('locationfound', onLocationFound);
-        map.on('locationerror', onLocationError);
     });
+    
+    map.on('locationfound', onLocationFound);
+    map.on('locationerror', onLocationError);
 };
 
 map.locate({setView: false, maxZoom: 16});
