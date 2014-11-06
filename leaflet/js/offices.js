@@ -48,16 +48,6 @@ L.control.layers(baseLayers, overlays).addTo(map);
 
 L.control.scale().addTo(map);
 
-function onLocationFound(e) {
-  var radius = e.accuracy / 2;
-
-  L.circle(e.latlng, radius).addTo(map);
-}
-
-function onLocationError(e) {
-  alert(e.message);
-}
-
 document.getElementById('find').onclick = function() {
     navigator.geolocation.getCurrentPosition(function(pos) {
         var res = leafletKnn(lrOffices).nearest(
@@ -68,11 +58,24 @@ document.getElementById('find').onclick = function() {
               .setLatLng([res[0].layer.feature.geometry.coordinates[1],res[0].layer.feature.geometry.coordinates[0]])
               .setContent("<h5>Your nearest office is <b><a href='" + res[0].layer.feature.properties.url + "'>" + res[0].layer.feature.properties.name + "</a></b></h5>")
               .openOn(map);
-            map.on('locationfound', onLocationFound);
-
-            map.locate({setView: true, maxZoom: 16});
-        } else {
-          map.on('locationerror', onLocationError);
         }
     });
 };
+
+function onLocationFound(e) {
+  var radius = e.accuracy / 2;
+
+  L.marker(e.latlng).addTo(map)
+    .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+  L.circle(e.latlng, radius).addTo(map);
+}
+
+function onLocationError(e) {
+  alert(e.message);
+}
+
+map.on('locationfound', onLocationFound);
+map.on('locationerror', onLocationError);
+
+map.locate({setView: true, maxZoom: 16});
