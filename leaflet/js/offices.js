@@ -51,9 +51,6 @@ L.control.scale().addTo(map);
 function onLocationFound(e) {
   var radius = e.accuracy / 2;
 
-  L.marker(e.latlng).addTo(map)
-    .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
   L.circle(e.latlng, radius).addTo(map);
 }
 
@@ -79,4 +76,4 @@ document.getElementById('find').onclick = function() {
 };
 
 
-map.locate({setView: false, maxZoom: 16});
+map.locate({setView: true, maxZoom: 16});
