@@ -48,19 +48,6 @@ L.control.layers(baseLayers, overlays).addTo(map);
 
 L.control.scale().addTo(map);
 
-function onLocationFound(e) {
-  var radius = e.accuracy / 2;
-
-  L.marker(e.latlng).addTo(map)
-    .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-  L.circle(e.latlng, radius).addTo(map);
-}
-
-function onLocationError(e) {
-  alert(e.message);
-}
-
 document.getElementById('find').onclick = function() {
     navigator.geolocation.getCurrentPosition(function(pos) {
         var res = leafletKnn(lrOffices).nearest(
@@ -73,9 +60,4 @@ document.getElementById('find').onclick = function() {
               .openOn(map);
         }
     });
-
-    map.on('locationfound', onLocationFound);
-    map.on('locationerror', onLocationError);
 };
-
-map.locate({setView: false, maxZoom: 16});
