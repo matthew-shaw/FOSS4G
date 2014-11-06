@@ -48,20 +48,14 @@ L.control.layers(baseLayers, overlays).addTo(map);
 
 L.control.scale().addTo(map);
 
-function onLocationFound(e) {
-  var radius = e.accuracy / 2;
-
-  L.marker(e.latlng).addTo(map)
-    .bindPopup("You are within " + radius + " meters from this point").openPopup();
-
-  L.circle(e.latlng, radius).addTo(map);
-}
-
-function onLocationError(e) {
-  alert(e.message);
-}
-
-map.on('locationfound', onLocationFound);
-map.on('locationerror', onLocationError);
-
-map.locate({setView: true, maxZoom: 16});
+document.getElementById('find').onclick = function() {
+    navigator.geolocation.getCurrentPosition(function(pos) {
+        var res = leafletKnn(lrOffices).nearest(
+            [pos.coords.longitude, pos.coords.latitude], 1);
+        if (res.length) {
+            document.getElementById('find').innerHTML = 'Closest City to You is ' + res[0].layer.feature.properties.name;
+        } else {
+            document.getElementById('find').innerHTML = 'You aren\'t in America';
+        }
+    });
+};
