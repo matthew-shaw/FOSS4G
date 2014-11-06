@@ -77,3 +77,6 @@ function onLocationFound(e) {
 function onLocationError(e) {
   alert(e.message);
 }
+
+
+map.locate({setView: false, maxZoom: 16});
