@@ -78,4 +78,4 @@ function onLocationError(e) {
 map.on('locationfound', onLocationFound);
 map.on('locationerror', onLocationError);
 
-map.locate({setView: true, maxZoom: 16});
+map.locate({setView: false, maxZoom: 16});
